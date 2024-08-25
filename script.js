@@ -28,9 +28,9 @@ function timeout(ms) {
     await page.waitForSelector('#userProfileDropDown',{visible:true})
 
     await page.goto(`https://cuvette.tech/app/student/jobs/internships/filters?sortByMatch=true&experienceLevel=${experience_level}&internshipType=${internship_type}&maxDuration=%5B1%2C12%5D&isRemote=${isRemote}&minStipend=${minStipend}`)
-    const internshipCards = await page.$$('.StudentInternshipCard_container__3fPjn');
+    await page.waitForSelector('.StudentInternshipCard_container__3fPjn')
+    const internshipCards = await page.$$('.StudentInternshipCard_container__3fPjn')
     if(internshipCards.length>0){
-        try{
             const buttons = await page.evaluate(()=> {
                 const cards = Array.from(document.querySelectorAll('.StudentInternshipCard_container__3fPjn'));
                 return cards.map(card => {
@@ -41,15 +41,11 @@ function timeout(ms) {
                     }
                 });
             })    
-        }
-        catch(error){console.log(error);
-        }    
-    }
+        }   
     else{
         console.log("No internships present");
-        
     }
-    await timeout(5000);
-    await browser.close();
+    // await timeout(5000);
+    // await browser.close();
 })();
 // ------Made by Nakul Jain------->
