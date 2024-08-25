@@ -26,7 +26,6 @@ function timeout(ms) {
     await page.click('.Button_button__2Lf63.LoginWithEmail_login__T6YaR')
     await timeout(3000)
     await page.waitForSelector('#userProfileDropDown',{visible:true})
-
     await page.goto(`https://cuvette.tech/app/student/jobs/internships/filters?sortByMatch=true&experienceLevel=${experience_level}&internshipType=${internship_type}&maxDuration=%5B1%2C12%5D&isRemote=${isRemote}&minStipend=${minStipend}`)
     await page.waitForSelector('.StudentInternshipCard_container__3fPjn')
     const internshipCards = await page.$$('.StudentInternshipCard_container__3fPjn')
@@ -45,7 +44,7 @@ function timeout(ms) {
     else{
         console.log("No internships present");
     }
-    // await timeout(5000);
-    // await browser.close();
+    await timeout(5000);
+    await browser.close();
 })();
 // ------Made by Nakul Jain------->
