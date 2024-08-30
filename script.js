@@ -27,7 +27,8 @@ function timeout(ms) {
     await timeout(3000)
     await page.waitForSelector('#userProfileDropDown',{visible:true})
     await page.goto(`https://cuvette.tech/app/student/jobs/internships/filters?sortByMatch=true&experienceLevel=${experience_level}&internshipType=${internship_type}&maxDuration=%5B1%2C12%5D&isRemote=${isRemote}&minStipend=${minStipend}`)
-    await page.waitForSelector('.StudentInternshipCard_container__3fPjn')
+    // await page.waitForSelector('.StudentInternshipCard_container__3fPjn')
+    await timeout(4000);
     const internshipCards = await page.$$('.StudentInternshipCard_container__3fPjn')
     if(internshipCards.length>0){
             const buttons = await page.evaluate(()=> {
@@ -35,8 +36,10 @@ function timeout(ms) {
                 return cards.map(card => {
                     try{
                         const button = card.querySelector('.Button_button__2Lf63').click();
+                        console.log("Applied Succesfully")
                     }
-                    catch(error){console.log(error);
+                    catch(error){
+                        console.log("Couldn't Apply: ",error);
                     }
                 });
             })    
